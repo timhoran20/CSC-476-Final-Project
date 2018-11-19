@@ -271,11 +271,14 @@ public class Weapon : MonoBehaviour
 		{
 			GameObject g = GameObject.Find(defaultBulletHolePoolNames[i]);
 
-			if (g.GetComponent<BulletHolePool>() != null)
-				defaultBulletHoles[i] = g.GetComponent<BulletHolePool>();
-			else
-				Debug.LogWarning("Default Bullet Hole Pool does not have a BulletHolePool component.  Please assign GameObjects in the inspector that have the BulletHolePool component.");
-		}
+            if (g != null)
+            {
+                if (g.GetComponent<BulletHolePool>() != null)
+                    defaultBulletHoles[i] = g.GetComponent<BulletHolePool>();
+                else
+                    Debug.LogWarning("Default Bullet Hole Pool does not have a BulletHolePool component.  Please assign GameObjects in the inspector that have the BulletHolePool component.");
+            }
+            }
 	}
 	
 	// Update is called once per frame
