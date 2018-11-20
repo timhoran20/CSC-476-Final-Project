@@ -22,8 +22,8 @@ public class Health : MonoBehaviour
 	public bool makeExplosion = false;			// Whether or not an explosion prefab should be instantiated
 	public GameObject explosion;				// The explosion prefab to be instantiated
 
-	public bool isPlayer = false;				// Whether or not this health is the player
-	public GameObject deathCam, mainCam;					// The camera to activate when the player dies
+	public bool isPlayer = false;               // Whether or not this health is the player
+    public GameObject deathCam;					// The camera to activate when the player dies
 
 	private bool dead = false;					// Used to make sure the Die() function isn't called twice
 
@@ -35,8 +35,11 @@ public class Health : MonoBehaviour
 		// Initialize the currentHealth variable to the value specified by the user in startingHealth
 		currentHealth = startingHealth;
 
-        deathCam = Instantiate(deathCamPrefab);
-        deathCam.GetComponent<Death_Cam>().player = this.gameObject;
+        if (isPlayer)
+        {
+            deathCam = Instantiate(deathCamPrefab);
+            deathCam.GetComponent<Death_Cam>().player = this.gameObject;
+        }
 	}
 
 	public void ChangeHealth(float amount)
@@ -70,15 +73,15 @@ public class Health : MonoBehaviour
             this.GetComponent<MouseRotator>().enabled = false;
             deathCam.SetActive(true);
             this.GetComponent<Rigidbody>().freezeRotation = false;
-        }
 
-        // Remove this GameObject from the scene
-        if (isPlayer)
-        {
             Destroy(gameObject, 3);
             Destroy(deathCam, 3);
         }
         else
-            Destroy(gameObject);
+        {
+            this.GetComponent<Rigidbody>().isKinematic = false;
+            this.GetComponent<Rigidbody>().freezeRotation = false;
+            Destroy(gameObject, 3);
+        }
 	}
 }
