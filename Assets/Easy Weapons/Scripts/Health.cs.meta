@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 8f433ee790f5df944b8b831148c83aba
+guid: 11e1876ddae4a1046b64b5dd5c293c0f
+labels:
+- Weapon
 MonoImporter:
-  externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
   executionOrder: 0
